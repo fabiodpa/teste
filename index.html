@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- EDITE AQUI: título da sua página que aparece na aba do navegador -->
+  <title>PromoHub – Ofertas e Promoções</title>
+
+  <!-- EDITE AQUI: descrição para SEO/Google -->
+  <meta name="description" content="As melhores ofertas e promoções selecionadas para você. Lojas parceiras e links de afiliados." />
+
+  <style>
+    /* =============================================
+       RESET E VARIÁVEIS GLOBAIS
+       ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* EDITE AQUI: cores principais do seu site */
+      --color-primary: #ff6900;       /* laranja principal */
+      --color-primary-dark: #e05a00;  /* laranja escuro (hover) */
+      --color-secondary: #1a1a2e;     /* fundo escuro do header */
+      --color-bg: #f5f5f7;            /* fundo geral da página */
+      --color-card: #ffffff;          /* fundo dos cards */
+      --color-text: #222222;          /* cor do texto principal */
+      --color-muted: #666666;         /* cor do texto secundário */
+      --color-badge-new: #22c55e;     /* cor do badge "Novo" */
+      --color-badge-hot: #ef4444;     /* cor do badge "Hot" */
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --transition: 0.2s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =============================================
+       HEADER / NAVBAR
+       ============================================= */
+    header {
+      background: var(--color-secondary);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    /* EDITE AQUI: nome/logo do seu site no header */
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--color-primary); /* destaca parte do nome */
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #ccc;
+      font-size: 0.95rem;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    /* =============================================
+       HERO BANNER
+       ============================================= */
+    .hero {
+      background: linear-gradient(135deg, var(--color-secondary) 0%, #16213e 100%);
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      color: #fff;
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+
+    .hero h1 span {
+      color: var(--color-primary);
+    }
+
+    /* EDITE AQUI: subtítulo do banner principal */
+    .hero p {
+      color: #aaa;
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .hero-cta:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* =============================================
+       SEÇÃO DE FILTROS / CATEGORIAS
+       ============================================= */
+    .filters-section {
+      max-width: 1200px;
+      margin: 48px auto 0;
+      padding: 0 24px;
+    }
+
+    .filters-section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 2px solid #ddd;
+      background: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    /* =============================================
+       GRID DE CARDS DE OFERTAS
+       ============================================= */
+    .offers-section {
+      max-width: 1200px;
+      margin: 32px auto 64px;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title .icon {
+      font-size: 1.5rem;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 24px;
+    }
+
+    /* =============================================
+       CARD INDIVIDUAL
+       ============================================= */
+    .card {
+      background: var(--color-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.14);
+    }
+
+    /* Badges no canto do card (Novo, Hot, etc.) */
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      z-index: 2;
+    }
+
+    .badge-new  { background: var(--color-badge-new); }
+    .badge-hot  { background: var(--color-badge-hot); }
+
+    /* Imagem do produto */
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #eee; /* cor de placeholder enquanto a imagem carrega */
+    }
+
+    /* Imagem placeholder (quando não houver foto real) */
+    .card-img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #e0e0e0 0%, #c8c8c8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #999;
+    }
+
+    .card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Tag da loja (Shopee, Amazon, Parceiro, etc.) */
+    .store-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    /* EDITE AQUI: cores por loja/parceiro */
+    .tag-shopee   { background: #ff6900; color: #fff; }
+    .tag-amazon   { background: #ff9900; color: #fff; }
+    .tag-parceiro { background: #1a1a2e; color: #fff; }
+    .tag-fisica   { background: #16a34a; color: #fff; }
+    /* Adicione mais tags conforme necessário */
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--color-text);
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+    }
+
+    .price-block {
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    /* Preço original riscado */
+    .price-original {
+      font-size: 0.85rem;
+      color: #aaa;
+      text-decoration: line-through;
+    }
+
+    /* Preço com desconto */
+    .price-sale {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    /* Porcentagem de desconto */
+    .discount-pct {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-badge-hot);
+      margin-left: 6px;
+    }
+
+    /* Botão de ver oferta */
+    .card-btn {
+      display: block;
+      text-align: center;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 12px;
+      transition: background var(--transition);
+    }
+
+    .card-btn:hover {
+      background: var(--color-primary-dark);
+    }
+
+    /* =============================================
+       BANNER DE PARCEIROS / LOJAS
+       ============================================= */
+    .partners-section {
+      background: #fff;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .partners-section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .partners-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* EDITE AQUI: substitua o texto pelos logos reais das lojas parceiras */
+    .partner-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--color-muted);
+      padding: 12px 24px;
+      border: 2px solid #eee;
+      border-radius: 8px;
+      transition: all var(--transition);
+    }
+
+    .partner-logo:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    footer {
+      background: var(--color-secondary);
+      color: #aaa;
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    /* EDITE AQUI: links do footer */
+    footer a {
+      color: var(--color-primary);
+    }
+
+    /* =============================================
+       RESPONSIVIDADE MOBILE
+       ============================================= */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.8rem; }
+      .nav-links { display: none; } /* menu mobile: pode implementar hamburger depois */
+      .offers-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       HEADER – NAVEGAÇÃO
+       ============================================= -->
+  <header>
+    <nav class="navbar">
+
+      <!-- EDITE AQUI: nome do seu site/marca -->
+      <div class="logo">Promo<span>Hub</span></div>
+
+      <!-- EDITE AQUI: links do menu (adicione ou remova itens) -->
+      <ul class="nav-links">
+        <li><a href="#ofertas">Ofertas</a></li>
+        <li><a href="#parceiros">Parceiros</a></li>
+        <!-- Exemplo: <li><a href="https://seusite.com/categorias">Categorias</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- =============================================
+       HERO BANNER PRINCIPAL
+       ============================================= -->
+  <section class="hero">
+    <!-- EDITE AQUI: título principal do banner -->
+    <h1>As melhores <span>ofertas</span> em um só lugar</h1>
+
+    <!-- EDITE AQUI: subtítulo/descrição do banner -->
+    <p>Curadoria diária de promoções das melhores lojas e parceiros selecionados para você economizar mais.</p>
+
+    <!-- EDITE AQUI: texto e link do botão principal do banner -->
+    <a href="#ofertas" class="hero-cta">Ver Todas as Ofertas</a>
+  </section>
+
+  <!-- =============================================
+       FILTROS POR CATEGORIA
+       ============================================= -->
+  <section class="filters-section">
+    <h2>Explorar por categoria</h2>
+    <div class="filters">
+
+      <!-- EDITE AQUI: adicione, remova ou renomeie os filtros de categoria -->
+      <button class="filter-btn active" onclick="filterOffers('all')">Todos</button>
+      <button class="filter-btn" onclick="filterOffers('shopee')">Shopee</button>
+      <button class="filter-btn" onclick="filterOffers('amazon')">Amazon</button>
+      <button class="filter-btn" onclick="filterOffers('fisica')">Loja Física</button>
+      <button class="filter-btn" onclick="filterOffers('parceiro')">Parceiros</button>
+      <!-- Exemplo: <button class="filter-btn" onclick="filterOffers('eletronicos')">Eletrônicos</button> -->
+    </div>
+  </section>
+
+  <!-- =============================================
+       GRID DE OFERTAS
+       ============================================= -->
+  <section class="offers-section" id="ofertas">
+    <div class="section-title">
+      <span class="icon">🔥</span> Destaques do Dia
+    </div>
+
+    <!-- 
+      EDITE AQUI: cada .card é uma oferta/produto
+      Para adicionar nova oferta, copie um bloco .card inteiro e cole aqui
+
+      Estrutura de cada card:
+      - data-category: categoria usada pelo filtro (shopee / amazon / fisica / parceiro)
+      - badge: opcional, "Novo" ou "Hot"
+      - card-img-placeholder: troque pelo <img> real do produto
+      - store-tag: tag da loja (tag-shopee / tag-amazon / tag-parceiro / tag-fisica)
+      - card-title: nome do produto
+      - card-desc: descrição curta
+      - price-original: preço original (opcional)
+      - price-sale: preço promocional
+      - discount-pct: percentual de desconto (ex: -45%)
+      - href do card-btn: SEU LINK DE AFILIADO ou link do parceiro
+    -->
+
+    <div class="offers-grid" id="offersGrid">
+
+      <!-- ======== CARD EXEMPLO 1 – SHOPEE ======== -->
+      <div class="card" data-category="shopee">
+        <span class="badge badge-hot">Hot</span>
+
+        <!-- EDITE AQUI: troque por <img src="URL_DA_IMAGEM" class="card-img" alt="Nome do produto"> -->
+        <div class="card-img-placeholder">🛍️</div>
+
+        <div class="card-body">
+          <span class="store-tag tag-shopee">Shopee</span>
+
+          <!-- EDITE AQUI: nome do produto -->
+          <h3 class="card-title">Fone Bluetooth Sem Fio – Qualidade Premium</h3>
+
+          <!-- EDITE AQUI: descrição curta do produto -->
+          <p class="card-desc">Bateria de 40h, cancelamento de ruído e design ultraleve. Perfeito para o dia a dia.</p>
+
+          <div class="price-block">
+            <!-- EDITE AQUI: preço original e preço com desconto -->
+            <div class="price-original">De R$ 189,90</div>
+            <div>
+              <span class="price-sale">R$ 89,90</span>
+              <span class="discount-pct">-53%</span>
+            </div>
+          </div>
+
+          <!-- EDITE AQUI: substitua o href pelo seu link de afiliado da Shopee -->
+          <a href="https://shope.ee/SEU_LINK_AQUI" target="_blank" rel="nofollow noopener" class="card-btn">
+            Ver Oferta na Shopee
+          </a>
+        </div>
+      </div>
+      <!-- ======== FIM CARD 1 ======== -->
+
+      <!-- ======== CARD EXEMPLO 2 – AMAZON ======== -->
+      <div class="card" data-category="amazon">
+        <span class="badge badge-new">Novo</span>
+        <div class="card-img-placeholder">📦</div>
+
+        <div class="card-body">
+          <span class="store-tag tag-amazon">Amazon</span>
+
+          <!-- EDITE AQUI: nome do produto -->
+          <h3 class="card-title">Kindle Paperwhite 16GB – À Prova d'Água</h3>
+
+          <!-- EDITE AQUI: descrição -->
+          <p class="card-desc">Leitura sem distrações, tela sem reflexo e semanas de bateria. O leitor definitivo.</p>
+
+          <div class="price-block">
+            <div class="price-original">De R$ 599,00</div>
+            <div>
+              <span class="price-sale">R$ 449,00</span>
+              <span class="discount-pct">-25%</span>
+            </div>
+          </div>
+
+          <!-- EDITE AQUI: substitua pelo seu link de afiliado Amazon -->
+          <a href="https://amzn.to/SEU_LINK_AQUI" target="_blank" rel="nofollow noopener" class="card-btn">
+            Ver Oferta na Amazon
+          </a>
+        </div>
+      </div>
+      <!-- ======== FIM CARD 2 ======== -->
+
+      <!-- ======== CARD EXEMPLO 3 – LOJA FÍSICA PARCEIRA ======== -->
+      <div class="card" data-category="fisica">
+        <div class="card-img-placeholder">🏪</div>
+
+        <div class="card-body">
+          <span class="store-tag tag-fisica">Loja Física</span>
+
+          <!-- EDITE AQUI: nome do produto/serviço da loja física -->
+          <h3 class="card-title">Tênis Esportivo – Coleção Verão 2026</h3>
+
+          <!-- EDITE AQUI: descrição e condição da oferta física -->
+          <p class="card-desc">Válido até 15/05/2026. Apresente este link ou cupom na loja parceira Esporte Total.</p>
+
+          <div class="price-block">
+            <div class="price-original">De R$ 320,00</div>
+            <div>
+              <span class="price-sale">R$ 199,00</span>
+              <span class="discount-pct">-38%</span>
+            </div>
+          </div>
+
+          <!-- EDITE AQUI: link do parceiro físico (pode ser WhatsApp, site ou cupom) -->
+          <a href="https://wa.me/55SEU_NUMERO?text=Quero+a+oferta+do+tênis" target="_blank" rel="noopener" class="card-btn">
+            Resgatar Oferta
+          </a>
+        </div>
+      </div>
+      <!-- ======== FIM CARD 3 ======== -->
+
+      <!-- ======== CARD EXEMPLO 4 – PARCEIRO ======== -->
+      <div class="card" data-category="parceiro">
+        <div class="card-img-placeholder">🤝</div>
+
+        <div class="card-body">
+          <span class="store-tag tag-parceiro">Parceiro</span>
+
+          <!-- EDITE AQUI: nome do produto/serviço do parceiro -->
+          <h3 class="card-title">Curso Online de Marketing Digital – Acesso Vitalício</h3>
+
+          <p class="card-desc">Mais de 80 aulas, certificado e suporte direto com o mentor. Vaga limitada.</p>
+
+          <div class="price-block">
+            <div class="price-original">De R$ 997,00</div>
+            <div>
+              <span class="price-sale">R$ 297,00</span>
+              <span class="discount-pct">-70%</span>
+            </div>
+          </div>
+
+          <!-- EDITE AQUI: link do parceiro (Hotmart, Eduzz, site próprio, etc.) -->
+          <a href="https://hotmart.com/SEU_LINK_AQUI" target="_blank" rel="nofollow noopener" class="card-btn">
+            Garantir Vaga
+          </a>
+        </div>
+      </div>
+      <!-- ======== FIM CARD 4 ======== -->
+
+      <!--
+        COPIE E COLE UM BLOCO .card ACIMA PARA ADICIONAR MAIS OFERTAS
+        Lembre de ajustar: data-category, store-tag, título, descrição, preços e link
+      -->
+
+    </div><!-- fim .offers-grid -->
+  </section>
+
+  <!-- =============================================
+       SEÇÃO DE PARCEIROS / LOJAS
+       ============================================= -->
+  <section class="partners-section" id="parceiros">
+
+    <!-- EDITE AQUI: texto acima dos logos parceiros -->
+    <h2>Nossas lojas parceiras</h2>
+
+    <div class="partners-grid">
+      <!-- EDITE AQUI: substitua os textos por <img src="logo.png"> quando tiver os logos -->
+      <div class="partner-logo">Shopee</div>
+      <div class="partner-logo">Amazon</div>
+      <div class="partner-logo">Esporte Total</div>  <!-- exemplo loja física -->
+      <div class="partner-logo">Hotmart</div>
+      <!-- Adicione mais parceiros aqui -->
+    </div>
+  </section>
+
+  <!-- =============================================
+       FOOTER
+       ============================================= -->
+  <footer>
+    <p>
+      <!-- EDITE AQUI: nome do site e ano -->
+      &copy; 2026 PromoHub – Todos os direitos reservados.<br />
+
+      <!-- EDITE AQUI: aviso de afiliado (obrigatório por lei / boas práticas) -->
+      Este site contém links de afiliados. Ao comprar através deles, recebo uma comissão sem custo adicional para você.<br />
+
+      <!-- EDITE AQUI: links de política e contato -->
+      <a href="#">Política de Privacidade</a> &nbsp;|&nbsp;
+      <a href="#">Termos de Uso</a> &nbsp;|&nbsp;
+      <a href="mailto:seuemail@email.com">Contato</a>
+    </p>
+  </footer>
+
+  <!-- =============================================
+       JAVASCRIPT – FILTRO DE CATEGORIAS
+       ============================================= -->
+  <script>
+    /**
+     * filterOffers(category)
+     * Mostra apenas os cards da categoria clicada.
+     * "all" mostra todos.
+     * O valor de category deve bater com o data-category do card.
+     */
+    function filterOffers(category) {
+      const cards = document.querySelectorAll('#offersGrid .card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      // Atualiza qual botão está ativo
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Mostra/esconde cards conforme categoria
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
