@@ -237,108 +237,6 @@
     }
 
     /* =============================================
-       SEÇÃO DE LINKS DE AFILIADOS
-       ============================================= */
-    .affiliate-links-section {
-      max-width: 1200px;
-      margin: 64px auto;
-      padding: 0 24px;
-    }
-
-    .affiliate-links-section h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 32px;
-      text-align: center;
-    }
-
-    .link-category {
-      margin-bottom: 48px;
-    }
-
-    .link-category h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--color-border);
-      color: var(--color-primary);
-    }
-
-    .link-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .link-card {
-      background: var(--color-card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform var(--transition), box-shadow var(--transition);
-      border: 1px solid var(--color-border);
-    }
-
-    .link-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.14);
-    }
-
-    .link-card-header {
-      padding: 16px;
-      background: var(--color-bg);
-      border-bottom: 1px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .link-card-icon {
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .link-card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--color-text);
-    }
-
-    .link-card-body {
-      padding: 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .link-card-desc {
-      font-size: 0.9rem;
-      color: var(--color-muted);
-      line-height: 1.5;
-    }
-
-    .link-card-btn {
-      display: block;
-      text-align: center;
-      background: var(--color-primary);
-      color: #fff;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-top: auto; /* Empurra o botão para baixo */
-      transition: background var(--transition);
-    }
-
-    .link-card-btn:hover {
-      background: var(--color-primary-dark);
-    }
-
-    /* =============================================
        FOOTER
        ============================================= */
     footer {
@@ -361,8 +259,6 @@
       .campaign-section h2 { font-size: 1.5rem; }
       .campaign-section p { font-size: 1rem; }
       .campaign-buttons { flex-direction: column; }
-      .affiliate-links-section h2 { font-size: 1.5rem; }
-      .link-category h3 { font-size: 1.2rem; }
     }
   </style>
 </head>
@@ -402,8 +298,9 @@
       <!-- EDITE AQUI: Subtítulo/descrição do banner -->
       <p>Encontre as melhores ofertas e promoções selecionadas, ou participe de nossas campanhas exclusivas.</p>
 
-      <!-- BOTÃO ALTERADO: Agora direciona para a seção de links de afiliados -->
-      <a href="#links-afiliados" class="hero-cta">Veja todas as Ofertas</a>
+      <!-- EDITE AQUI: Texto e link do botão principal do banner
+           Este botão agora aponta para a nova página de ofertas (ofertas.html) -->
+      <a href="ofertas.html" class="hero-cta">Veja todas as Ofertas</a>
     </div>
   </section>
 
@@ -427,106 +324,6 @@
         Sou Consumidor - Quero Descontos
       </a>
     </div>
-  </section>
-
-  <!-- =============================================
-       SEÇÃO DE LINKS DE AFILIADOS
-       ============================================= -->
-  <section class="affiliate-links-section" id="links-afiliados">
-    <h2>Nossos Links de Afiliados e Parceiros</h2>
-
-    <!-- =============================================
-         CATEGORIA: LOJAS ONLINE
-         ============================================= -->
-    <div class="link-category">
-      <h3>Lojas Online</h3>
-      <div class="link-grid">
-
-        <!-- ======== CARD DE LINK 1 – SHOPEE (PRIMEIRO LINK) ======== -->
-        <div class="link-card">
-          <div class="link-card-header">
-            <span class="link-card-icon">🛍️</span>
-            <div class="link-card-title">Shopee</div>
-          </div>
-          <div class="link-card-body">
-            <!-- EDITE AQUI: Descrição do link/loja -->
-            <p class="link-card-desc">As melhores ofertas e cupons da Shopee em diversas categorias. Frete grátis e muito mais!</p>
-            <!-- LINK DE AFILIADO DA SHOPEE INSERIDO AQUI -->
-            <a href="https://s.shopee.com.br/5VS2T33LmV?share_channel_code=1" target="_blank" rel="nofollow noopener" class="link-card-btn">
-              Ir para Shopee
-            </a>
-          </div>
-        </div>
-        <!-- ======== FIM CARD 1 ======== -->
-
-        <!-- ======== CARD DE LINK 2 – AMAZON (EXEMPLO) ======== -->
-        <div class="link-card">
-          <div class="link-card-header">
-            <span class="link-card-icon">📦</span>
-            <div class="link-card-title">Amazon</div>
-          </div>
-          <div class="link-card-body">
-            <!-- EDITE AQUI: Descrição do link/loja -->
-            <p class="link-card-desc">Milhões de produtos com entrega rápida e segura. Livros, eletrônicos, casa e muito mais.</p>
-            <!-- EDITE AQUI: Seu link de afiliado da Amazon -->
-            <a href="https://amzn.to/SEU_LINK_AFILIADO_AMAZON" target="_blank" rel="nofollow noopener" class="link-card-btn">
-              Ir para Amazon
-            </a>
-          </div>
-        </div>
-        <!-- ======== FIM CARD 2 ======== -->
-
-        <!-- ======== CARD DE LINK 3 – HOTMART (EXEMPLO) ======== -->
-        <div class="link-card">
-          <div class="link-card-header">
-            <span class="link-card-icon">🎓</span>
-            <div class="link-card-title">Hotmart</div>
-          </div>
-          <div class="link-card-body">
-            <!-- EDITE AQUI: Descrição do link/plataforma -->
-            <p class="link-card-desc">Cursos online, e-books e produtos digitais para seu desenvolvimento pessoal e profissional.</p>
-            <!-- EDITE AQUI: Seu link de afiliado da Hotmart -->
-            <a href="https://hotm.art/SEU_LINK_AFILIADO_HOTMART" target="_blank" rel="nofollow noopener" class="link-card-btn">
-              Ver Cursos
-            </a>
-          </div>
-        </div>
-        <!-- ======== FIM CARD 3 ======== -->
-
-        <!-- COPIE E COLE UM BLOCO .link-card ACIMA PARA ADICIONAR MAIS LINKS DE LOJAS ONLINE -->
-
-      </div><!-- fim .link-grid -->
-    </div><!-- fim .link-category -->
-
-    <!-- =============================================
-         CATEGORIA: LOJAS FÍSICAS PARCEIRAS
-         ============================================= -->
-    <div class="link-category">
-      <h3>Lojas Físicas Parceiras</h3>
-      <div class="link-grid">
-
-        <!-- ======== CARD DE LINK 4 – LOJA FÍSICA EXEMPLO ======== -->
-        <div class="link-card">
-          <div class="link-card-header">
-            <span class="link-card-icon">🏪</span>
-            <div class="link-card-title">Esporte Total</div>
-          </div>
-          <div class="link-card-body">
-            <!-- EDITE AQUI: Descrição do link/loja física -->
-            <p class="link-card-desc">Descontos exclusivos em tênis, roupas e acessórios esportivos. Válido em todas as unidades.</p>
-            <!-- EDITE AQUI: Link para o WhatsApp, site da loja ou cupom digital -->
-            <a href="https://wa.me/55SEU_NUMERO?text=Quero+o+desconto+da+Esporte+Total" target="_blank" rel="noopener" class="link-card-btn">
-              Ver Desconto
-            </a>
-          </div>
-        </div>
-        <!-- ======== FIM CARD 4 ======== -->
-
-        <!-- COPIE E COLE UM BLOCO .link-card ACIMA PARA ADICIONAR MAIS LINKS DE LOJAS FÍSICAS -->
-
-      </div><!-- fim .link-grid -->
-    </div><!-- fim .link-category -->
-
   </section>
 
   <!-- =============================================
