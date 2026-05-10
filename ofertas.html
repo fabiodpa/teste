@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- EDITE AQUI: Título da página de ofertas -->
-  <title>PromoHub – Todas as Ofertas</title>
+  <!-- EDITE AQUI: Título da sua página que aparece na aba do navegador -->
+  <title>PromoHub – Links de Afiliados e Campanhas</title>
 
-  <!-- EDITE AQUI: Descrição para SEO/Google da página de ofertas -->
-  <meta name="description" content="Lista completa de links de afiliados e ofertas exclusivas do PromoHub." />
+  <!-- EDITE AQUI: Descrição para SEO/Google -->
+  <meta name="description" content="Seus links de afiliados e campanhas exclusivas em um só lugar. Encontre as melhores ofertas!" />
 
   <style>
     /* =============================================
-       RESET E VARIÁVEIS GLOBAIS (Copie do index.html para manter consistência)
+       RESET E VARIÁVEIS GLOBAIS
        ============================================= */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -21,21 +21,25 @@
     }
 
     :root {
-      --color-primary: #ff6900;
-      --color-primary-dark: #e05a00;
-      --color-secondary: #1a1a2e;
-      --color-bg: #f5f5f7;
-      --color-card: #ffffff;
-      --color-text: #222222;
-      --color-muted: #666666;
-      --color-border: #e5e5e5;
-      --color-badge-new: #22c55e;
-      --color-badge-hot: #ef4444;
+      /* EDITE AQUI: Cores principais do seu site (Light Mode) */
+      --color-primary: #ff6900;       /* Laranja principal */
+      --color-primary-dark: #e05a00;  /* Laranja escuro (hover) */
+      --color-secondary: #1a1a2e;     /* Fundo escuro do header/footer */
+      --color-bg: #f5f5f7;            /* Fundo geral da página */
+      --color-card: #ffffff;          /* Fundo dos cards/seções */
+      --color-text: #222222;          /* Cor do texto principal */
+      --color-muted: #666666;         /* Cor do texto secundário */
+      --color-border: #e5e5e5;        /* Cor de bordas e divisores */
+      --color-badge-new: #22c55e;     /* Cor do badge "Novo" */
+      --color-badge-hot: #ef4444;     /* Cor do badge "Hot" */
       --radius: 12px;
       --shadow: 0 4px 24px rgba(0,0,0,0.08);
       --transition: 0.2s ease;
     }
 
+    /* =============================================
+       DARK MODE
+       ============================================= */
     [data-theme="dark"] {
       --color-bg: #0f0f13;
       --color-card: #1e1e2e;
@@ -56,7 +60,7 @@
     a { text-decoration: none; color: inherit; }
 
     /* =============================================
-       HEADER / NAVBAR (Copie do index.html para manter consistência)
+       HEADER / NAVBAR
        ============================================= */
     header {
       background: var(--color-secondary);
@@ -76,18 +80,19 @@
       height: 64px;
     }
 
+    /* EDITE AQUI: Nome/Logo do seu site no header */
     .logo {
       font-size: 1.6rem;
       font-weight: 800;
       color: #fff;
       letter-spacing: -0.5px;
-      display: flex;
+      display: flex; /* Para alinhar imagem se for logo */
       align-items: center;
       gap: 8px;
     }
 
     .logo img {
-      height: 40px;
+      height: 40px; /* Ajuste o tamanho da sua logo */
       width: auto;
     }
 
@@ -99,6 +104,7 @@
       gap: 16px;
     }
 
+    /* Botão toggle dark/light mode */
     .theme-toggle {
       background: none;
       border: 2px solid rgba(255,255,255,0.2);
@@ -117,34 +123,150 @@
     .theme-toggle:hover { border-color: var(--color-primary); }
 
     /* =============================================
-       SEÇÃO DE LISTAGEM DE OFERTAS
+       HERO BANNER (Principal)
        ============================================= */
-    .offers-list-section {
-      max-width: 900px; /* Um pouco mais estreito para focar na lista */
+    .hero {
+      background: linear-gradient(135deg, var(--color-secondary) 0%, #16213e 100%);
+      padding: 72px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      color: #fff;
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+
+    .hero h1 span { color: var(--color-primary); }
+
+    /* EDITE AQUI: Subtítulo do banner principal */
+    .hero p {
+      color: #aaa;
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .hero-cta:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* =============================================
+       SEÇÃO DE CAMPANHA COM DOIS BOTÕES
+       ============================================= */
+    .campaign-section {
+      background: var(--color-card);
+      padding: 64px 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .campaign-section h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: var(--color-text);
+    }
+
+    .campaign-section p {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .campaign-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .campaign-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: all var(--transition);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .campaign-btn.primary {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .campaign-btn.primary:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .campaign-btn.secondary {
+      background: var(--color-card);
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+
+    .campaign-btn.secondary:hover {
+      background: var(--color-primary);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* =============================================
+       SEÇÃO DE TABELA DE OFERTAS
+       ============================================= */
+    .offers-table-section {
+      max-width: 1200px;
       margin: 64px auto;
       padding: 0 24px;
     }
 
-    .offers-list-section h1 {
-      font-size: 2.2rem;
+    .offers-table-section h2 {
+      font-size: 1.8rem;
       font-weight: 800;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
       text-align: center;
-      color: var(--color-text);
     }
 
-    /* Estilo para a tabela de ofertas */
+    .offers-table-wrapper {
+      background: var(--color-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden; /* Para bordas arredondadas da tabela */
+      border: 1px solid var(--color-border);
+    }
+
     .offers-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 40px;
-      background: var(--color-card);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
     }
 
-    .offers-table th, .offers-table td {
+    .offers-table th,
+    .offers-table td {
       padding: 16px;
       text-align: left;
       border-bottom: 1px solid var(--color-border);
@@ -163,49 +285,53 @@
       border-bottom: none;
     }
 
-    .offers-table tbody tr:hover {
-      background: var(--color-bg);
+    .offers-table td {
+      background: var(--color-card);
+      color: var(--color-text);
+      font-size: 0.95rem;
     }
 
-    .offer-store {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
+    .offers-table td:first-child {
+      width: 80px; /* Largura para a imagem */
+      text-align: center;
     }
 
-    .offer-store-icon {
-      font-size: 1.5rem;
-      line-height: 1;
+    .offer-image {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+      background: #f0f0f0; /* Placeholder */
     }
 
     .offer-title {
       font-weight: 600;
-      color: var(--color-text);
+      margin-bottom: 4px;
     }
 
     .offer-description {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--color-muted);
     }
 
-    .offer-link-btn {
+    .offer-action-btn {
       display: inline-block;
       background: var(--color-primary);
       color: #fff;
       padding: 8px 16px;
       border-radius: 50px;
-      font-size: 0.85rem;
       font-weight: 700;
+      font-size: 0.9rem;
       transition: background var(--transition);
     }
 
-    .offer-link-btn:hover {
+    .offer-action-btn:hover {
       background: var(--color-primary-dark);
     }
 
     /* =============================================
-       FOOTER (Copie do index.html para manter consistência)
+       FOOTER
        ============================================= */
     footer {
       background: var(--color-secondary);
@@ -216,42 +342,26 @@
 
     footer p { font-size: 0.85rem; line-height: 2; }
 
+    /* EDITE AQUI: links do footer */
     footer a { color: var(--color-primary); }
 
     /* =============================================
        RESPONSIVIDADE MOBILE
        ============================================= */
     @media (max-width: 768px) {
-      .offers-list-section h1 { font-size: 1.8rem; }
-      .offers-table, .offers-table tbody, .offers-table tr, .offers-table td, .offers-table th {
-        display: block;
+      .hero h1 { font-size: 1.8rem; }
+      .campaign-section h2 { font-size: 1.5rem; }
+      .campaign-section p { font-size: 1rem; }
+      .campaign-buttons { flex-direction: column; }
+      .offers-table-section h2 { font-size: 1.5rem; }
+
+      /* Tabela responsiva */
+      .offers-table-wrapper {
+        overflow-x: auto; /* Permite rolar horizontalmente em telas pequenas */
       }
-      .offers-table thead { display: none; }
-      .offers-table tr {
-        margin-bottom: 15px;
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
+      .offers-table {
+        min-width: 600px; /* Garante que a tabela não fique muito espremida */
       }
-      .offers-table td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-      }
-      .offers-table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        width: calc(50% - 20px);
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: 700;
-        color: var(--color-text);
-      }
-      .offer-store { justify-content: flex-end; }
-      .offer-store-icon { margin-right: auto; }
-      .offer-link-btn { width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -262,12 +372,17 @@
        ============================================= -->
   <header>
     <nav class="navbar">
+
+      <!-- EDITE AQUI: Sua logo ou nome do site.
+           Se for imagem, use <img src="URL_DA_SUA_LOGO.png" alt="Sua Logo">
+           Se for texto, use <div>Promo<span>Hub</span></div> -->
       <div class="logo">
         <!-- <img src="URL_DA_SUA_LOGO.png" alt="Sua Logo"> -->
-        <a href="index.html">Promo<span>Hub</span></a> <!-- Link para a página inicial -->
+        Promo<span>Hub</span>
       </div>
 
       <div class="nav-actions">
+        <!-- Botão toggle dark/light mode -->
         <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
           🌙 Dark
         </button>
@@ -276,91 +391,64 @@
   </header>
 
   <!-- =============================================
-       SEÇÃO DE LISTAGEM DE OFERTAS
+       HERO BANNER PRINCIPAL
        ============================================= -->
-  <section class="offers-list-section">
-    <h1>Todas as Ofertas e Links de Afiliados</h1>
+  <section class="hero">
+    <div class="hero-content">
+      <!-- EDITE AQUI: Título principal do banner -->
+      <h1>Seus links de <span>afiliados</span> e campanhas em um só lugar</h1>
 
-    <table class="offers-table">
-      <thead>
-        <tr>
-          <th>Loja</th>
-          <th>Oferta/Produto</th>
-          <th>Ação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- ======== OFERTA 1 – SHOPEE (Link Principal) ======== -->
-        <tr>
-          <td data-label="Loja">
-            <div class="offer-store">
-              <span class="offer-store-icon">🛒</span> Shopee
-            </div>
-          </td>
-          <td data-label="Oferta/Produto">
-            <div class="offer-title"><a href="https://s.shopee.com.br/5VS2T33LmV?share_channel_code=1"</div>
-            <div class="offer-description">Acesse as melhores promoções e cupons da Shopee.</div>
-          </td>
-          <td data-label="Ação">
-            <!-- EDITE AQUI: Seu link de afiliado da Shopee -->
-            <a href="https://s.shopee.com.br/5VS2T33LmV?share_channel_code=1" target="_blank" rel="nofollow noopener" class="offer-link-btn">
-              Ver Oferta
-            </a>
-          </td>
-        </tr>
-        <!-- ======== FIM OFERTA 1 ======== -->
+      <!-- EDITE AQUI: Subtítulo/descrição do banner -->
+      <p>Encontre as melhores ofertas e promoções selecionadas, ou participe de nossas campanhas exclusivas.</p>
 
-        <!-- ======== OFERTA 2 – SHOPEE (Segundo Link) ======== -->
-        <tr>
-          <td data-label="Loja">
-            <div class="offer-store">
-              <span class="offer-store-icon">🛍️</span> Shopee
-            </div>
-          </td>
-          <td data-label="Oferta/Produto">
-            <div class="offer-title">Oferta Especial Shopee - Produto X</div>
-            <div class="offer-description">Desconto exclusivo em eletrônicos selecionados.</div>
-          </td>
-          <td data-label="Ação">
-            <!-- EDITE AQUI: Seu segundo link de afiliado da Shopee -->
-            <a href="https://s.shopee.com.br/30khUX234G?share_channel_code=1" target="_blank" rel="nofollow noopener" class="offer-link-btn">
-              Ver Oferta
-            </a>
-          </td>
-        </tr>
-        <!-- ======== FIM OFERTA 2 ======== -->
+      <!-- EDITE AQUI: Texto e link do botão principal do banner -->
+      <a href="#offers-table-section" class="hero-cta">Veja todas as Ofertas</a>
+    </div>
+  </section>
 
-        <!-- ======== OFERTA 3 – AMAZON (Exemplo) ======== -->
-        <tr>
-          <td data-label="Loja">
-            <div class="offer-store">
-              <span class="offer-store-icon">📦</span> Amazon
-            </div>
-          </td>
-          <td data-label="Oferta/Produto">
-            <div class="offer-title">Livros e E-books com Desconto</div>
-            <div class="offer-description">Explore a vasta seleção de livros da Amazon.</div>
-          </td>
-          <td data-label="Ação">
-            <!-- EDITE AQUI: Seu link de afiliado da Amazon -->
-            <a href="https://amzn.to/SEU_LINK_AFILIADO_AMAZON" target="_blank" rel="nofollow noopener" class="offer-link-btn">
-              Ver Oferta
-            </a>
-          </td>
-        </tr>
-        <!-- ======== FIM OFERTA 3 ======== -->
+  <!-- =============================================
+       SEÇÃO DE CAMPANHA COM DOIS BOTÕES DE CADASTRO
+       ============================================= -->
+  <section class="campaign-section">
+    <!-- EDITE AQUI: Título da sua campanha -->
+    <h2>Participe da Nossa Campanha Exclusiva!</h2>
 
-        <!--
-          COPIE E COLE UM BLOCO <tr>...</tr> ACIMA PARA ADICIONAR MAIS OFERTAS.
-          Lembre de ajustar:
-            - offer-store (ícone e nome da loja)
-            - offer-title (título da oferta/produto)
-            - offer-description (descrição curta)
-            - href do offer-link-btn (SEU LINK DE AFILIADO)
-        -->
+    <!-- EDITE AQUI: Descrição da campanha -->
+    <p>Seja um lojista parceiro e divulgue suas ofertas, ou um consumidor e tenha acesso a descontos incríveis.</p>
 
-      </tbody>
-    </table>
+    <div class="campaign-buttons">
+      <!-- EDITE AQUI: Link para o formulário de cadastro de lojistas -->
+      <a href="https://forms.gle/SEU_LINK_LOJISTA" target="_blank" class="campaign-btn primary">
+        Sou Lojista - Quero Cadastrar
+      </a>
+      <!-- EDITE AQUI: Link para o formulário de cadastro de consumidores -->
+      <a href="https://forms.gle/SEU_LINK_CONSUMIDOR" target="_blank" class="campaign-btn secondary">
+        Sou Consumidor - Quero Descontos
+      </a>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SEÇÃO DE TABELA DE OFERTAS
+       ============================================= -->
+  <section class="offers-table-section" id="offers-table-section">
+    <h2>Todas as Ofertas e Links de Afiliados</h2>
+
+    <div class="offers-table-wrapper">
+      <table class="offers-table">
+        <thead>
+          <tr>
+            <th></th> <!-- Para a imagem -->
+            <th>Loja</th>
+            <th>Oferta/Produto</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="offersTableBody">
+          <!-- As ofertas serão inseridas aqui pelo JavaScript -->
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <!-- =============================================
@@ -391,7 +479,6 @@
        ----------------------------------------------- */
     const themeToggle = document.getElementById('themeToggle');
 
-    // Verifica preferência salva ou do sistema operacional
     function initTheme() {
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -411,6 +498,113 @@
     }
 
     initTheme();
+
+    /* -----------------------------------------------
+       GERENCIAMENTO DE OFERTAS NA TABELA
+       ----------------------------------------------- */
+
+    // EDITE AQUI: Array de objetos com suas ofertas.
+    // Adicione mais objetos para cada nova oferta.
+    // O campo 'image' e 'title' serão preenchidos automaticamente (se possível)
+    // ou você pode preenchê-los manualmente para maior controle.
+    const offers = [
+      {
+        store: 'Shopee',
+        link: 'https://s.shopee.com.br/5VS2T33LmV?share_channel_code=1',
+        description: 'Acesse as melhores promoções e cupons da Shopee.',
+        image: '', // Será preenchido via scraping ou manualmente
+        title: ''  // Será preenchido via scraping ou manualmente
+      },
+      {
+        store: 'Shopee',
+        link: 'https://s.shopee.com.br/30khUX234G?share_channel_code=1',
+        description: 'Desconto exclusivo em eletrônicos selecionados.',
+        image: '',
+        title: ''
+      },
+      // EDITE AQUI: Adicione mais ofertas aqui seguindo o mesmo formato
+      /*
+      {
+        store: 'Amazon',
+        link: 'https://amzn.to/SEU_LINK_AQUI',
+        description: 'Livros e E-books com Desconto. Explore a vasta seleção de livros da Amazon.',
+        image: '',
+        title: ''
+      },
+      */
+    ];
+
+    const offersTableBody = document.getElementById('offersTableBody');
+
+    // Função para adicionar uma linha na tabela
+    function addOfferToTable(offer) {
+      const row = offersTableBody.insertRow();
+      row.innerHTML = `
+        <td><img src="${offer.image || 'https://via.placeholder.com/60?text=Produto'}" alt="${offer.title || 'Produto'}" class="offer-image"></td>
+        <td>${offer.store}</td>
+        <td>
+          <div class="offer-title">${offer.title || 'Carregando...'}</div>
+          <div class="offer-description">${offer.description}</div>
+        </td>
+        <td><a href="${offer.link}" target="_blank" rel="nofollow noopener" class="offer-action-btn">Ver Oferta</a></td>
+      `;
+    }
+
+    // Função para tentar obter informações da página (imagem e título)
+    // ATENÇÃO: Esta função de scraping pode não funcionar devido a CORS ou bloqueios dos sites.
+    // É mais seguro preencher 'image' e 'title' manualmente no array 'offers'.
+    async function fetchOfferDetails(offer) {
+      try {
+        // Devido a restrições de CORS (Cross-Origin Resource Sharing), o navegador
+        // não permite que JavaScript em um domínio (seu site) faça requisições
+        // para outro domínio (Shopee) e leia o conteúdo diretamente.
+        // Para contornar isso, você precisaria de um "proxy" no seu servidor (VPS)
+        // que faria a requisição para a Shopee e retornaria o HTML para o seu site.
+        // Isso está além do escopo de um HTML/CSS/JS puro.
+
+        // Por enquanto, vamos simular um carregamento e usar placeholders
+        // ou você pode preencher manualmente no array 'offers'.
+
+        // Exemplo de como você FARIA se o CORS permitisse (não vai funcionar no navegador):
+        // const response = await fetch(offer.link);
+        // const html = await response.text();
+        // const parser = new DOMParser();
+        // const doc = parser.parseFromString(html, 'text/html');
+        // offer.title = doc.querySelector('meta[property="og:title"]')?.content || 'Oferta Shopee';
+        // offer.image = doc.querySelector('meta[property="og:image"]')?.content || 'https://via.placeholder.com/60';
+
+        // Simulação de carregamento e preenchimento manual/placeholder
+        await new Promise(resolve => setTimeout(resolve, 500)); // Simula um atraso de rede
+
+        // EDITE AQUI: Se você quiser preencher manualmente, faça-o no array 'offers' acima.
+        // Caso contrário, ele usará os placeholders.
+        if (!offer.title) {
+            offer.title = "Produto Shopee"; // Título padrão se não for preenchido
+        }
+        if (!offer.image) {
+            offer.image = "https://via.placeholder.com/60?text=Produto"; // Imagem padrão se não for preenchida
+        }
+
+      } catch (error) {
+        console.error('Erro ao buscar detalhes da oferta:', offer.link, error);
+        offer.title = 'Oferta Indisponível';
+        offer.image = 'https://via.placeholder.com/60?text=Erro';
+      }
+      return offer;
+    }
+
+    // Carrega as ofertas na tabela
+    async function loadOffers() {
+      for (const offer of offers) {
+        // Tenta buscar detalhes, mas como explicado, pode não funcionar via JS puro no navegador.
+        // Se quiser imagens e títulos específicos, preencha-os diretamente no array 'offers'.
+        const populatedOffer = await fetchOfferDetails(offer);
+        addOfferToTable(populatedOffer);
+      }
+    }
+
+    // Chama a função para carregar as ofertas quando a página é carregada
+    document.addEventListener('DOMContentLoaded', loadOffers);
   </script>
 
 </body>
