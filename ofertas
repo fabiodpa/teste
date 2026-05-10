@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- EDITE AQUI: Título da página de ofertas -->
+  <title>PromoHub – Todas as Ofertas</title>
+
+  <!-- EDITE AQUI: Descrição para SEO/Google da página de ofertas -->
+  <meta name="description" content="Lista completa de links de afiliados e ofertas exclusivas do PromoHub." />
+
+  <style>
+    /* =============================================
+       RESET E VARIÁVEIS GLOBAIS (Copie do index.html para manter consistência)
+       ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-primary: #ff6900;
+      --color-primary-dark: #e05a00;
+      --color-secondary: #1a1a2e;
+      --color-bg: #f5f5f7;
+      --color-card: #ffffff;
+      --color-text: #222222;
+      --color-muted: #666666;
+      --color-border: #e5e5e5;
+      --color-badge-new: #22c55e;
+      --color-badge-hot: #ef4444;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --transition: 0.2s ease;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #0f0f13;
+      --color-card: #1e1e2e;
+      --color-text: #e8e8f0;
+      --color-muted: #9999aa;
+      --color-border: #2e2e3e;
+      --color-secondary: #12121c;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* =============================================
+       HEADER / NAVBAR (Copie do index.html para manter consistência)
+       ============================================= */
+    header {
+      background: var(--color-secondary);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo span { color: var(--color-primary); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 6px 14px;
+      color: #fff;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .theme-toggle:hover { border-color: var(--color-primary); }
+
+    /* =============================================
+       SEÇÃO DE LISTAGEM DE OFERTAS
+       ============================================= */
+    .offers-list-section {
+      max-width: 900px; /* Um pouco mais estreito para focar na lista */
+      margin: 64px auto;
+      padding: 0 24px;
+    }
+
+    .offers-list-section h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 40px;
+      text-align: center;
+      color: var(--color-text);
+    }
+
+    /* Estilo para a tabela de ofertas */
+    .offers-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      background: var(--color-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .offers-table th, .offers-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .offers-table th {
+      background: var(--color-secondary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .offers-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .offers-table tbody tr:hover {
+      background: var(--color-bg);
+    }
+
+    .offer-store {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .offer-store-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .offer-title {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .offer-description {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    .offer-link-btn {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: background var(--transition);
+    }
+
+    .offer-link-btn:hover {
+      background: var(--color-primary-dark);
+    }
+
+    /* =============================================
+       FOOTER (Copie do index.html para manter consistência)
+       ============================================= */
+    footer {
+      background: var(--color-secondary);
+      color: #aaa;
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    footer p { font-size: 0.85rem; line-height: 2; }
+
+    footer a { color: var(--color-primary); }
+
+    /* =============================================
+       RESPONSIVIDADE MOBILE
+       ============================================= */
+    @media (max-width: 768px) {
+      .offers-list-section h1 { font-size: 1.8rem; }
+      .offers-table, .offers-table tbody, .offers-table tr, .offers-table td, .offers-table th {
+        display: block;
+      }
+      .offers-table thead { display: none; }
+      .offers-table tr {
+        margin-bottom: 15px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .offers-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+      .offers-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 700;
+        color: var(--color-text);
+      }
+      .offer-store { justify-content: flex-end; }
+      .offer-store-icon { margin-right: auto; }
+      .offer-link-btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       HEADER – NAVEGAÇÃO
+       ============================================= -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <!-- <img src="URL_DA_SUA_LOGO.png" alt="Sua Logo"> -->
+        <a href="index.html">Promo<span>Hub</span></a> <!-- Link para a página inicial -->
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+          🌙 Dark
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =============================================
+       SEÇÃO DE LISTAGEM DE OFERTAS
+       ============================================= -->
+  <section class="offers-list-section">
+    <h1>Todas as Ofertas e Links de Afiliados</h1>
+
+    <table class="offers-table">
+      <thead>
+        <tr>
+          <th>Loja</th>
+          <th>Oferta/Produto</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ======== OFERTA 1 – SHOPEE (Link Principal) ======== -->
+        <tr>
+          <td data-label="Loja">
+            <div class="offer-store">
+              <span class="offer-store-icon">🛒</span> Shopee
+            </div>
+          </td>
+          <td data-label="Oferta/Produto">
+            <div class="offer-title">Página Principal de Ofertas da Shopee</div>
+            <div class="offer-description">Acesse as melhores promoções e cupons da Shopee.</div>
+          </td>
+          <td data-label="Ação">
+            <!-- EDITE AQUI: Seu link de afiliado da Shopee -->
+            <a href="https://s.shopee.com.br/5VS2T33LmV?share_channel_code=1" target="_blank" rel="nofollow noopener" class="offer-link-btn">
+              Ver Oferta
+            </a>
+          </td>
+        </tr>
+        <!-- ======== FIM OFERTA 1 ======== -->
+
+        <!-- ======== OFERTA 2 – SHOPEE (Segundo Link) ======== -->
+        <tr>
+          <td data-label="Loja">
+            <div class="offer-store">
+              <span class="offer-store-icon">🛍️</span> Shopee
+            </div>
+          </td>
+          <td data-label="Oferta/Produto">
+            <div class="offer-title">Oferta Especial Shopee - Produto X</div>
+            <div class="offer-description">Desconto exclusivo em eletrônicos selecionados.</div>
+          </td>
+          <td data-label="Ação">
+            <!-- EDITE AQUI: Seu segundo link de afiliado da Shopee -->
+            <a href="https://s.shopee.com.br/30khUX234G?share_channel_code=1" target="_blank" rel="nofollow noopener" class="offer-link-btn">
+              Ver Oferta
+            </a>
+          </td>
+        </tr>
+        <!-- ======== FIM OFERTA 2 ======== -->
+
+        <!-- ======== OFERTA 3 – AMAZON (Exemplo) ======== -->
+        <tr>
+          <td data-label="Loja">
+            <div class="offer-store">
+              <span class="offer-store-icon">📦</span> Amazon
+            </div>
+          </td>
+          <td data-label="Oferta/Produto">
+            <div class="offer-title">Livros e E-books com Desconto</div>
+            <div class="offer-description">Explore a vasta seleção de livros da Amazon.</div>
+          </td>
+          <td data-label="Ação">
+            <!-- EDITE AQUI: Seu link de afiliado da Amazon -->
+            <a href="https://amzn.to/SEU_LINK_AFILIADO_AMAZON" target="_blank" rel="nofollow noopener" class="offer-link-btn">
+              Ver Oferta
+            </a>
+          </td>
+        </tr>
+        <!-- ======== FIM OFERTA 3 ======== -->
+
+        <!--
+          COPIE E COLE UM BLOCO <tr>...</tr> ACIMA PARA ADICIONAR MAIS OFERTAS.
+          Lembre de ajustar:
+            - offer-store (ícone e nome da loja)
+            - offer-title (título da oferta/produto)
+            - offer-description (descrição curta)
+            - href do offer-link-btn (SEU LINK DE AFILIADO)
+        -->
+
+      </tbody>
+    </table>
+  </section>
+
+  <!-- =============================================
+       FOOTER
+       ============================================= -->
+  <footer>
+    <p>
+      <!-- EDITE AQUI: Nome do site e ano -->
+      &copy; 2026 PromoHub – Todos os direitos reservados.<br />
+
+      <!-- EDITE AQUI: Aviso de afiliado (obrigatório por lei / boas práticas) -->
+      Este site contém links de afiliados. Ao comprar através deles, recebo uma comissão sem custo adicional para você.<br />
+
+      <!-- EDITE AQUI: Links de política e contato -->
+      <a href="#">Política de Privacidade</a> &nbsp;|&nbsp;
+      <a href="#">Termos de Uso</a> &nbsp;|&nbsp;
+      <!-- EDITE AQUI: Seu e-mail de contato -->
+      <a href="mailto:seuemail@email.com">Contato</a>
+    </p>
+  </footer>
+
+  <!-- =============================================
+       JAVASCRIPT
+       ============================================= -->
+  <script>
+    /* -----------------------------------------------
+       DARK MODE
+       ----------------------------------------------- */
+    const themeToggle = document.getElementById('themeToggle');
+
+    // Verifica preferência salva ou do sistema operacional
+    function initTheme() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      applyTheme(theme);
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    initTheme();
+  </script>
+
+</body>
+</html>
